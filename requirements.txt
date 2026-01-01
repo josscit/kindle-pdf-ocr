@@ -1,0 +1,6 @@
+pyautogui==0.9.54
+pillow==10.4.0
+numpy==1.26.4
+img2pdf==0.5.1
+ocrmypdf==16.13.0
+gradio>=5.0.0

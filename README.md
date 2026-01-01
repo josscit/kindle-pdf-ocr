@@ -6,8 +6,87 @@
 Automate screenshot capture from Kindle for PC and convert to searchable PDF with OCR. Creates AI-ready PDFs with invisible text layer for ChatGPT, Claude, and other AI assistants.
 
 > 📖 **New user?** See [QUICK_START.md](QUICK_START.md) for beginner-friendly guide.
->
-> 🎨 **Screenshots coming soon!** See [docs/images/README.md](docs/images/README.md) to contribute.
+
+---
+
+## 👀 Preview
+
+### Web Interface
+
+Clean, modern UI with simple controls:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│ 📚 Kindle to Searchable PDF                            │
+├─────────────────────────────────────────────────────────┤
+│ System Status                                           │
+│ ✅ OCR Ready: Tesseract and Ghostscript found!         │
+├─────────────────────────────────────────────────────────┤
+│ ⚙️ Capture Settings                                    │
+│                                                         │
+│ 📖 Number of Pages: [━━━━●━━] 5                       │
+│ ⏱️ Delay Between Pages: [━━●━━] 2.0s                  │
+│                                                         │
+│ 🔍 OCR Settings                                        │
+│ ☑️ Enable OCR (Searchable PDF)                        │
+│ Language: [Italian ▼]                                  │
+│                                                         │
+│         [ 🚀 Start Capture ]                           │
+│                                                         │
+├─────────────────────────────────────────────────────────┤
+│ 📊 Status & Results                                    │
+│                                                         │
+│ Click 'Start Capture' to begin...                      │
+│                                                         │
+│         [ 📄 Download PDF ]                            │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Terminal Output Example
+
+```bash
+$ .\.venv\Scripts\activate
+$ python app.py
+
+============================================================
+  📚 KINDLE TO PDF OCR - WEB INTERFACE
+============================================================
+
+🚀 Starting server on port 7861...
+
+⚠️  If browser doesn't open automatically:
+   👉 CLICK THIS LINK: http://127.0.0.1:7861
+
+💡 Keep this window open while using the app!
+============================================================
+
+* Running on local URL:  http://127.0.0.1:7861
+
+📸 Pagina 1/5 catturata
+📸 Pagina 2/5 catturata
+📸 Pagina 3/5 catturata
+📸 Pagina 4/5 catturata
+📸 Pagina 5/5 catturata
+
+✅ CATTURA COMPLETATA - 5 pagine
+
+📄 Creazione PDF base...
+✅ PDF base creato: ebook_20260101_124609_base.pdf (0.94 MB)
+
+🔍 Aggiunta layer OCR al PDF...
+🔍 Esecuzione OCR (lingua: ita)...
+
+Scanning contents     ████████████████████ 100% 5/5
+OCR                   ████████████████████ 100% 5/5
+PDF/A conversion      ████████████████████ 100% 5/5
+Linearizing           ████████████████████ 100% 100/100
+
+✅ PDF SEARCHABLE CREATO!
+📄 File: ebook_20260101_124609_searchable.pdf
+📦 Dimensione: 0.95 MB
+
+💡 Ora gli AI agent possono leggere il testo del libro!
+```
 
 ---
 

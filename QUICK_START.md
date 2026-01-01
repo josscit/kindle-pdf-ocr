@@ -12,6 +12,87 @@ Kindle book → Automatic screenshots → PDF with searchable text → AI tools 
 
 ---
 
+## 👀 What It Looks Like
+
+### The Web Interface
+
+When you run the program, you'll see a clean interface like this:
+
+```
+╔═══════════════════════════════════════════════════════╗
+║  📚 Kindle to Searchable PDF                         ║
+╠═══════════════════════════════════════════════════════╣
+║  System Status                                        ║
+║  ✅ OCR Ready: Tesseract and Ghostscript found!      ║
+╠═══════════════════════════════════════════════════════╣
+║  ⚙️ Capture Settings                                 ║
+║                                                       ║
+║  📖 Number of Pages: [━━━━●━] 5                     ║
+║  ⏱️ Delay: [━━●━━] 2.0 seconds                      ║
+║                                                       ║
+║  🔍 OCR Settings                                     ║
+║  ☑️ Enable OCR (Searchable PDF)                     ║
+║  Language: [Italian ▼]                               ║
+║                                                       ║
+║            [ 🚀 Start Capture ]                      ║
+║                                                       ║
+╠═══════════════════════════════════════════════════════╣
+║  📊 Status & Results                                 ║
+║                                                       ║
+║  ✅ PDF Created Successfully!                        ║
+║  📄 File: ebook_20260101_124609_searchable.pdf       ║
+║  📦 Size: 0.95 MB                                    ║
+║  🔍 PDF is searchable - AI agents can read it!       ║
+║                                                       ║
+║            [ 📄 Download PDF ]                       ║
+╚═══════════════════════════════════════════════════════╝
+```
+
+### The Terminal Shows Progress
+
+```
+============================================================
+  📚 KINDLE TO PDF OCR - WEB INTERFACE
+============================================================
+
+🚀 Starting server on port 7861...
+
+⚠️  If browser doesn't open automatically:
+   👉 CLICK THIS LINK: http://127.0.0.1:7861
+
+💡 Keep this window open while using the app!
+============================================================
+
+* Running on local URL:  http://127.0.0.1:7861
+
+📸 Pagina 1/5 catturata
+📸 Pagina 2/5 catturata
+📸 Pagina 3/5 catturata
+📸 Pagina 4/5 catturata
+📸 Pagina 5/5 catturata
+
+✅ CATTURA COMPLETATA - 5 pagine
+
+📄 Creazione PDF base...
+✅ PDF base creato: ebook_20260101_124609_base.pdf
+
+🔍 Aggiunta layer OCR al PDF...
+
+Scanning contents     ████████████████████ 100% 5/5
+OCR                   ████████████████████ 100% 5/5
+PDF/A conversion      ████████████████████ 100% 5/5
+
+✅ PDF SEARCHABLE CREATO!
+📄 File: ebook_20260101_124609_searchable.pdf
+📦 Dimensione: 0.95 MB
+
+💡 Ora gli AI agent possono leggere il testo del libro!
+```
+
+**That's what you'll see while it works!** Pretty cool, right? 😊
+
+---
+
 ## ⏱️ Time Required
 
 - **Setup (first time only):** 20 minutes

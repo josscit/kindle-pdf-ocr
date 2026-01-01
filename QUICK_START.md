@@ -1,395 +1,345 @@
-# 📚 Quick Start - Simple Guide for Everyone
+# 📚 Quick Start - Simple Guide
 
-**Convert your Kindle ebooks to searchable PDF in 5 easy steps!**
+**Convert Kindle ebooks to searchable PDF - Easy guide for everyone!**
 
-No technical knowledge required! 😊
+No technical knowledge needed! 😊
 
 ---
 
 ## 🎯 What This Does
 
-Takes your Kindle book → Creates a PDF file → AI tools can read the text!
-
-Perfect for using with ChatGPT, Claude, or any AI assistant.
+Kindle book → Automatic screenshots → PDF with searchable text → AI tools can read it!
 
 ---
 
-## 📋 What You Need
+## ⏱️ Time Required
 
-- Windows 10 or 11
-- Kindle for PC (free app from Amazon)
-- 20 minutes for first-time setup
-
----
-
-## 🔧 PART 1: Setup (Do This Once)
-
-Follow these 5 steps **one time only**. After this, using the program is super easy!
+- **Setup (first time only):** 20 minutes
+- **Each use after:** 2 minutes to start + capture time
 
 ---
 
-### **STEP 1: Install Python**
+## 📦 PART 1: Setup (Do Once)
 
-**What's Python?** The "engine" that runs the program.
+---
 
-1. Open browser → Go to **www.python.org/downloads**
-2. Click big yellow button **"Download Python 3.12"**
-3. Run the downloaded file
-4. **⚠️ IMPORTANT:** Check the box **"Add Python to PATH"** ← Don't forget!
+### ✅ **STEP 1: Install Python**
+
+**What is it?** The "engine" that runs the program.
+
+1. Go to **www.python.org/downloads**
+2. Click yellow **"Download Python 3.12"** button
+3. Run downloaded file
+4. **⚠️ CRITICAL:** Check box **"Add Python to PATH"** ✓
 5. Click **"Install Now"**
 6. Wait 1-2 minutes
 
-**Verify it worked:**
-- Press Windows key
-- Type **cmd** → Press Enter
-- In black window, type: `python --version`
-- Should show: `Python 3.12.x` ✅
+**Test it worked:**
+- Press Windows key → Type **cmd** → Enter
+- Type: `python --version`
+- See "Python 3.12.x"? ✅ Good!
+- See error? Go back and reinstall, check the PATH box!
 
 ---
 
-### **STEP 2: Download This Program**
+### ✅ **STEP 2: Download Program**
 
 1. Go to **github.com/josscit/kindle-pdf-ocr**
-2. Click green button **"<> Code"**
+2. Click green **"<> Code"** button
 3. Click **"Download ZIP"**
-4. File downloads: `kindle-pdf-ocr-main.zip`
-5. Go to **Downloads** folder
-6. Right-click ZIP → **"Extract All"**
-7. Extract to **Desktop** (or anywhere you want)
+4. Go to **Downloads** folder
+5. Right-click `kindle-pdf-ocr-main.zip` → **"Extract All"**
+6. Extract to **Desktop**
 
-**You now have a folder:** `kindle-pdf-ocr-main`
+**Result:** Folder `kindle-pdf-ocr-main` on your Desktop
 
 ---
 
-### **STEP 3: Install Program Components**
+### ✅ **STEP 3: Install Program Parts**
 
-1. **Open the folder:** Go to `kindle-pdf-ocr-main` on your Desktop
-2. **Open PowerShell here:**
-   - Click the address bar at top (where it shows the path)
+1. **Open the folder** `kindle-pdf-ocr-main`
+2. **Open PowerShell:**
+   - Click address bar at top
    - Type: **powershell**
    - Press Enter
-   - A blue window opens
+   - Blue window opens
 
-3. **Create program space** - Type this and press Enter:
+3. **Type these 3 commands** (press Enter after each):
+
+**Command 1:**
 ```
 python -m venv .venv
 ```
-Wait 10-20 seconds (creates a hidden folder `.venv`)
+*Creates program space - wait 10 seconds*
 
-4. **Activate the space** - Type this and press Enter:
+**Command 2:**
 ```
 .\.venv\Scripts\activate
 ```
-You'll see `(.venv)` appear at start of line ✅
+*Activates space - you'll see `(.venv)` appear ✅*
 
-5. **Install components** - Type this and press Enter:
+**Command 3:**
 ```
 pip install -r requirements.txt
 ```
-**Wait 3-5 minutes** - lots of text will scroll. When cursor reappears, it's done! ✅
+*Installs components - wait 3-5 minutes, text scrolls*
+
+**When cursor reappears:** Done! ✅
 
 ---
 
-### **STEP 4: Install Tesseract (Text Reader)**
+### ✅ **STEP 4: Install Tesseract**
 
-**What is it?** Reads text from screenshot images.
+**What is it?** Reads text from images.
 
-1. **Download:** [Click here for Tesseract](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.5.0.20250102.exe)
-2. Run the downloaded file
-3. **⚠️ CRITICAL:** During installation, when it asks about languages:
-   - Check **"Additional language data (download)"**
-   - Find and check **"Italian"** (or your book's language)
-   - If you skip this, OCR won't work!
-4. Click **"Next"** until **"Install"**
-5. Wait → **"Finish"**
+1. **Download:** [Tesseract Installer](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.5.0.20250102.exe)
+2. Run file
+3. **⚠️ CRITICAL:** When asked about languages:
+   - Check **"Additional language data (download)"** ✓
+   - Check **"Italian"** ✓ (or your book's language)
+4. Click **"Next"** until done
 
 ---
 
-### **STEP 5: Install Ghostscript (PDF Builder)**
+### ✅ **STEP 5: Install Ghostscript**
 
-**What is it?** Combines screenshots and text into final PDF.
+**What is it?** Builds the final PDF.
 
-1. **Download:** [Click here for Ghostscript](https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10031/gs10031w64.exe)
-2. Run the downloaded file
-3. Click **"Next"** → **"Next"** → **"Install"**
-4. Wait → **"Finish"**
-
----
-
-## ✅ Setup Complete!
-
-**You did it!** 🎉 Now you can use the program anytime!
+1. **Download:** [Ghostscript Installer](https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10031/gs10031w64.exe)
+2. Run file
+3. Click **"Next"** → **"Install"** → **"Finish"**
 
 ---
 
-## 🚀 PART 2: Using the Program (Every Time)
+## 🎉 Setup Complete!
 
-Choose **Method 1** (with interface) or **Method 2** (without interface):
+**You're ready!** Now let's use it!
 
 ---
 
-## 🎨 METHOD 1: With Graphical Interface (Easier)
+## 🚀 PART 2: Using the Program
 
-### **Every time you want to create a PDF:**
+**Choose Method 1 (graphical) or Method 2 (text-based):**
 
-1. **Open PowerShell in program folder:**
-   - Go to `kindle-pdf-ocr-main` folder
-   - Click address bar → Type **powershell** → Enter
+---
 
-2. **Start the program** - Type these 2 commands:
+## 🎨 METHOD 1: With Interface (Recommended)
+
+### **Every time you want a PDF:**
+
+**Step 1: Start Program**
+
+1. Open `kindle-pdf-ocr-main` folder
+2. Click address bar → Type **powershell** → Enter
+3. **Type 2 commands:**
+
 ```
 .\.venv\Scripts\activate
+```
+*See `(.venv)` appear? Good!*
+
+```
 python app.py
 ```
+*Browser should open automatically!*
 
-3. **Browser opens automatically** with colorful interface!
-
-4. **Configure what you want:**
-   - **Number of Pages:** Move slider (e.g., 10 pages)
-   - **Delay:** Leave at 2.0 seconds
-   - **Enable OCR:** Keep checked ✅
-   - **Language:** Choose your book's language (ita/eng/fra/deu)
-
-5. **Before clicking "Start Capture":**
-   - Open **Kindle for PC**
-   - Open your book
-   - Press **F11** (fullscreen)
-   - Go to **first page** you want
-
-6. **Click "🚀 Start Capture"** button
-
-7. **Countdown starts - YOU HAVE 10 SECONDS:**
-   - Minimize browser
-   - Click on Kindle window
-   - Don't touch anything!
-
-8. **Program works automatically** - Kindle pages turn by themselves
-
-9. **When done, return to browser** - Click **"Download PDF"** ✅
-
-**DONE!** You have your searchable PDF! 🎉
+**If browser doesn't open:**
+- Manually open browser
+- Go to: **http://127.0.0.1:7861**
 
 ---
 
-## ⌨️ METHOD 2: Without Interface (Text-Based)
+**Step 2: Configure**
 
-For those who prefer the classic way.
+In the web page:
+- **Number of Pages:** Slide to your number (e.g., 10)
+- **Delay:** Leave at 2.0
+- **Enable OCR:** Keep checked ✅
+- **Language:** Select your book's language
 
-### **Every time you want to create a PDF:**
+---
 
-1. **Open PowerShell** in `kindle-pdf-ocr-main` folder
+**Step 3: Prepare Kindle**
 
-2. **Type these 2 commands:**
+Before clicking "Start Capture":
+- Open **Kindle for PC**
+- Open your book
+- Press **F11** (fullscreen)
+- Go to **first page**
+
+---
+
+**Step 4: Capture**
+
+1. Click **"🚀 Start Capture"** button
+2. **10 second countdown starts**
+3. **Quick! Do this:**
+   - Minimize browser (click on taskbar)
+   - Click on Kindle window
+4. **Don't touch anything!**
+   - Pages turn automatically
+   - Wait until done
+
+---
+
+**Step 5: Download**
+
+1. Return to browser
+2. See "✅ PDF Created Successfully!"
+3. Click **"Download PDF"** button
+
+**Done!** 🎉
+
+---
+
+## ⌨️ METHOD 2: Text-Based
+
+For those who prefer command-line.
+
+1. Open PowerShell in folder
+2. Type:
 ```
 .\.venv\Scripts\activate
 python kindle_auto_pdf_ocr.py
 ```
-
-3. **Answer questions** (type and press Enter):
-   - How many pages? → Type number (e.g., **10**)
-   - Delay? → Press Enter (uses default)
-   - OCR? → Press Enter (says Yes)
-   - Language? → Type **ita** (or **eng** for English)
-
-4. **Countdown starts (10 seconds)** - Prepare Kindle same as Method 1
-
-5. **Program captures automatically**
-
-6. **Find your PDF:**
-   - Go to `screenshots` folder
-   - Open newest folder
-   - PDF is there! ✅
+3. Answer questions
+4. Same capture process as Method 1
+5. Find PDF in `screenshots\[date_time]\` folder
 
 ---
 
-## 🆘 Common Problems
+## 🆘 Problems?
 
-### "python not recognized"
+### Can't activate (.venv not found)
 
-**You forgot** to check "Add Python to PATH" during install!
-
-**Fix:** Uninstall Python → Reinstall → Check the box!
-
----
-
-### "ModuleNotFoundError: No module named 'gradio'"
-
-**You skipped** the install step!
-
-**Fix:**
+**You skipped STEP 3!** Go back and create `.venv`:
 ```
-.\.venv\Scripts\activate
+python -m venv .venv
+```
+
+---
+
+### "No module named 'gradio'"
+
+**You didn't install components!** After activating:
+```
 pip install -r requirements.txt
 ```
-Wait for it to finish, then try again.
+Wait for it to finish!
 
 ---
 
 ### "Tesseract not found"
 
-**Fix:** Install Tesseract (STEP 4) - don't forget to select Italian language!
+**Fix:** Install Tesseract (STEP 4) with Italian language pack!
 
 ---
 
-### "Ghostscript not found" or "OCR failed"
+### "Ghostscript not found"
 
 **Fix:** Install Ghostscript (STEP 5)
 
 ---
 
-### Text is blurry in PDF
+### Browser doesn't open
 
-**This is normal!** Screenshot quality isn't perfect, but:
-- Text is **readable** ✅
-- AI tools can **read it perfectly** ✅
+**Normal!** Manually open browser and go to:
+```
+http://127.0.0.1:7861
+```
+
+---
+
+### "Port already in use"
+
+Previous program still running.
+
+**Fix:** Close PowerShell, wait 10 seconds, start again.
+
+---
+
+### Blurry text in PDF
+
+**This is normal!** Screenshot quality isn't perfect.
+- Text is readable ✅
+- AI can read it perfectly ✅
 - Good enough for analysis!
 
 ---
 
-### Program turns pages but doesn't capture
+## 💡 Tips
 
-**You didn't click on Kindle!**
-
-**Remember:** During 10-second countdown, you MUST click on Kindle window to activate it!
-
----
-
-### Captures wrong pages
-
-**Delay too short** - pages don't load in time.
-
-**Fix:** Change delay to 3.0 seconds instead of 2.0
+1. ✅ **Test first** - Try 3 pages before full book
+2. ✅ **Fullscreen always** - Press F11 on Kindle
+3. ✅ **No distractions** - Close popups/notifications
+4. ✅ **Right language** - Match OCR to book language
+5. ✅ **Keep PowerShell open** - Don't close while program runs
 
 ---
 
-## 💡 Pro Tips
+## ⏱️ How Long?
 
-1. ✅ **Clean screen** - Close all popups before capturing
-2. ✅ **Always fullscreen** - Press F11 on Kindle
-3. ✅ **Test first** - Try 3 pages before doing whole book
-4. ✅ **Right language** - Italian book? Use "ita" for OCR
-5. ✅ **Hands off** - Don't touch mouse during capture!
+- 10 pages: ~3 minutes
+- 50 pages: ~12 minutes
+- 200 pages: ~45 minutes
 
----
-
-## ⏱️ How Long Does It Take?
-
-- 10-page book: ~2-3 minutes
-- 100-page book: ~15-20 minutes
-- 300-page book: ~45-60 minutes
-
-**Plan accordingly!** ☕
+Plan ahead! ☕
 
 ---
 
-## ⚖️ Legal - Important!
+## ⚖️ Legal
 
-**You can ONLY use this for:**
-- ✅ Books you purchased legally
-- ✅ Public domain content
-- ✅ Personal backup
+**OK to use for:**
+✅ Your purchased ebooks (personal backup)  
+✅ Public domain books  
+✅ Your own content  
 
-**Do NOT:**
-- ❌ Share PDFs with others
-- ❌ Sell the PDFs
-- ❌ Violate copyright
+**NOT OK:**
+❌ Sharing PDFs  
+❌ Selling PDFs  
+❌ Copyright violation  
 
-**Respect authors' rights!** 📚
+**This tool takes screenshots - doesn't hack DRM. You're responsible for legal use.**
 
 ---
 
-## 📘 Technical Box: Understanding Virtual Environments
+## 📘 Technical Box (Optional Reading)
 
 <details>
-<summary><b>Click here if you want to understand what <code>.venv</code> means</b></summary>
+<summary><b>What is <code>.venv</code> and why activate?</b></summary>
 
-### What's a Virtual Environment?
+### Simple Explanation
 
-Think of it like a **separate kitchen** for this program:
-- Has its own ingredients (packages)
-- Doesn't mess with your main kitchen (system Python)
-- Can be cleaned up without breaking anything else
+**`.venv`** = A "private box" for this program
 
-### Why `.venv`?
+When you did `python -m venv .venv`, Python created a hidden folder called `.venv` containing:
+- Its own Python
+- Its own packages (gradio, etc.)
 
-When you installed components (STEP 3), they went into a folder called `.venv` (the dot makes it hidden).
+### Why?
 
-This folder contains:
-- Python (just for this program)
-- All packages (gradio, pyautogui, etc.)
+So this program doesn't mess with other Python programs on your PC!
 
-### Why Activate?
+### What Does "Activate" Mean?
 
 When you type `.\.venv\Scripts\activate`:
-- Windows temporarily uses **this folder's Python**
-- All commands now use this isolated version
+- Windows temporarily says: "Use Python from THIS box"
 - You see `(.venv)` at start of line to remind you
+- All commands now use this private Python
 
-### What if I Don't Activate?
+### What if I Forget to Activate?
 
-Python uses the system version, which doesn't have gradio installed → Error!
+Python uses the "normal" system version, which doesn't have gradio → Error!
 
-### The `.venv` vs `env` Confusion
-
-- `.venv` = Modern standard (what we actually use)
-- `env` = Old name (some guides use this)
-
-**They're the same thing, just different names!**
-
-Our project uses `.venv` (starts with dot = hidden folder on Windows).
-
-</details>
-
-<details>
-<summary><b>Click here to learn about <code>uv</code> (the shortcut tool)</b></summary>
-
-### What is uv?
-
-A **faster way** to run Python programs without typing multiple commands.
-
-### Normal Way (4 commands):
-```
-python -m venv .venv
-.\.venv\Scripts\activate
-pip install -r requirements.txt
-python app.py
-```
-
-### With uv (1 command):
-```
-uv run app.py
-```
-
-**That's it!** uv automatically:
-1. Finds `.venv` folder
-2. Activates it
-3. Installs missing packages
-4. Runs your program
-
-### Should You Install uv?
-
-**Optional!** The program works fine without it.
-
-**Install if:** You want fewer commands and faster speed
-
-**Skip if:** You're comfortable with traditional method
-
-### How to Install uv
-
-**Windows (PowerShell):**
-```powershell
-powershell -Command "iwr https://astral.sh/uv/install.ps1 -useb | iex"
-```
-
-Then you can use `uv run app.py` instead of activating each time!
+**Remember:** Always activate before running!
 
 </details>
 
 ---
 
-## ❓ Still Need Help?
+## ❓ Need Help?
 
-Open an [Issue on GitHub](https://github.com/josscit/kindle-pdf-ocr/issues) - we're happy to help!
+[Open an issue on GitHub](https://github.com/josscit/kindle-pdf-ocr/issues)
 
 ---
 

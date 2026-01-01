@@ -190,12 +190,19 @@ with gr.Blocks(title="Kindle to Searchable PDF") as demo:
 
 # Launch
 if __name__ == "__main__":
-    print("Starting Kindle to PDF OCR Web UI...")
-    print("Server URL will be displayed below:")
+    print("\n" + "="*60)
+    print("  📚 KINDLE TO PDF OCR - WEB INTERFACE")
+    print("="*60)
+    print("\n🚀 Starting server...")
+    print("\n⚠️  If browser doesn't open automatically:")
+    print("   👉 Open your browser and go to: http://127.0.0.1:7861")
+    print("\n" + "="*60 + "\n")
+    
     demo.launch(
         server_name="127.0.0.1",
         server_port=7861,
         share=False,
         show_error=True,
-        inbrowser=True
+        inbrowser=True,
+        quiet=False
     )

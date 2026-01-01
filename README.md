@@ -9,6 +9,18 @@ Automate screenshot capture from Kindle for PC and convert to searchable PDF wit
 
 ---
 
+> 💡 **Works with more than just Kindle!**
+> 
+> This tool captures **any fullscreen application** that navigates with arrow keys:
+> - 📱 Kindle for PC, Calibre, other ebook readers
+> - 📄 PDF viewers (Adobe, Foxit, browser PDF view)
+> - 📊 PowerPoint presentations
+> - 🌐 Online book readers, flipbooks, web documents
+> 
+> **Requirements:** Fullscreen mode (F11) + Right arrow (→) to turn pages
+
+---
+
 ## 👀 Preview
 
 ### Web Interface

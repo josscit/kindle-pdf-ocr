@@ -190,19 +190,38 @@ with gr.Blocks(title="Kindle to Searchable PDF") as demo:
 
 # Launch
 if __name__ == "__main__":
-    print("\n" + "="*60)
-    print("  📚 KINDLE TO PDF OCR - WEB INTERFACE")
-    print("="*60)
-    print("\n🚀 Starting server...")
-    print("\n⚠️  If browser doesn't open automatically:")
-    print("   👉 Open your browser and go to: http://127.0.0.1:7861")
-    print("\n" + "="*60 + "\n")
+    PORT = 7861
+    URL = f"http://127.0.0.1:{PORT}"
     
-    demo.launch(
-        server_name="127.0.0.1",
-        server_port=7861,
-        share=False,
-        show_error=True,
-        inbrowser=True,
-        quiet=False
-    )
+    print("\n" + "="*70)
+    print("  📚 KINDLE TO PDF OCR - WEB INTERFACE")
+    print("="*70)
+    print("\n🚀 Starting server on port", PORT, "...")
+    print("\n⚠️  If browser doesn't open automatically:")
+    print(f"\n   👉 CLICK THIS LINK: \033]8;;{URL}\033\\{URL}\033]8;;\033\\")
+    print(f"\n   Or copy and paste: {URL}")
+    print("\n💡 Keep this window open while using the app!")
+    print("="*70 + "\n")
+    
+    try:
+        demo.launch(
+            server_name="127.0.0.1",
+            server_port=PORT,
+            share=False,
+            show_error=True,
+            inbrowser=True,
+            quiet=False
+        )
+    except OSError as e:
+        if "Cannot find empty port" in str(e):
+            print("\n⚠️  Port 7861 is busy! Trying alternative port 7862...")
+            demo.launch(
+                server_name="127.0.0.1",
+                server_port=7862,
+                share=False,
+                show_error=True,
+                inbrowser=True,
+                quiet=False
+            )
+        else:
+            raise

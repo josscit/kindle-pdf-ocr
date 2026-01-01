@@ -141,11 +141,13 @@ pip install -r requirements.txt
 ```
 python app.py
 ```
-*Browser should open automatically!*
 
-**If browser doesn't open:**
-- Manually open browser
-- Go to: **http://127.0.0.1:7861**
+**What happens:**
+- PowerShell shows a link: `http://127.0.0.1:7861`
+- Browser should open automatically
+- If not, **CTRL+Click the link** or copy-paste it in your browser
+
+> 💡 **Note:** If you see "port 7861 busy", the program automatically tries port 7862. Use the link shown in PowerShell!
 
 ---
 

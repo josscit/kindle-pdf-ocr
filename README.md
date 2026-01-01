@@ -6,6 +6,8 @@
 Automate screenshot capture from Kindle for PC and convert to searchable PDF with OCR. Creates AI-ready PDFs with invisible text layer for ChatGPT, Claude, and other AI assistants.
 
 > 📖 **New user?** See [QUICK_START.md](QUICK_START.md) for beginner-friendly guide.
+>
+> 🎨 **Screenshots coming soon!** See [docs/images/README.md](docs/images/README.md) to contribute.
 
 ---
 
@@ -62,7 +64,9 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Browser opens at `http://127.0.0.1:7861`
+Browser opens automatically at `http://127.0.0.1:7861`
+
+> 💡 **Note:** If port 7861 is busy, the app automatically tries port 7862. If browser doesn't open, click the link shown in terminal or manually navigate to the displayed URL.
 
 **Or run CLI:**
 ```bash

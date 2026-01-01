@@ -173,12 +173,13 @@ pip install -r requirements.txt
 
 **What is it?** Reads text from images.
 
-1. **Download:** [Tesseract Installer](https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.5.0.20250102.exe)
-2. Run file
-3. **⚠️ CRITICAL:** When asked about languages:
+1. **Download:** [Tesseract Installer](https://github.com/tesseract-ocr/tesseract/releases/download/5.5.0/tesseract-ocr-w64-setup-5.5.0.20241111.exe)
+2. Or see other versions: [Tesseract Wiki](https://github.com/UB-Mannheim/tesseract/wiki)
+3. Run file
+4. **⚠️ CRITICAL:** When asked about languages:
    - Check **"Additional language data (download)"** ✓
    - Check **"Italian"** ✓ (or your book's language)
-4. Click **"Next"** until done
+5. Click **"Next"** until done
 
 ---
 

@@ -5,10 +5,11 @@ Per creare PDF searchable servono **DUE programmi**:
 ## 1️⃣ Tesseract OCR (estrae il testo)
 
 **Download diretto (CONSIGLIATO):**
-1. Scarica: https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.5.0.20250102.exe
-2. Esegui l'installer
-3. **⚠️ IMPORTANTE**: Durante installazione, seleziona "Additional language data (download)" e scegli **Italian (ita)**
-4. Percorso default: `C:\Program Files\Tesseract-OCR\`
+1. Scarica: https://github.com/tesseract-ocr/tesseract/releases/download/5.5.0/tesseract-ocr-w64-setup-5.5.0.20241111.exe
+2. Oppure vedi altre versioni: https://github.com/UB-Mannheim/tesseract/wiki
+3. Esegui l'installer
+4. **⚠️ IMPORTANTE**: Durante installazione, seleziona "Additional language data (download)" e scegli **Italian (ita)**
+5. Percorso default: `C:\Program Files\Tesseract-OCR\`
 
 **Via Winget:**
 ```powershell

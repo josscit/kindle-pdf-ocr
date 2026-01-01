@@ -32,7 +32,12 @@ cd kindle-pdf-ocr
 
 # Create virtual environment
 python -m venv env
-source env/bin/activate  # Windows: env\Scripts\activate
+
+# Activate (Windows)
+env\Scripts\activate
+
+# Activate (Linux/Mac)
+source env/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt

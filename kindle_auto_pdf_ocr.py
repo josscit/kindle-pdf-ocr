@@ -12,8 +12,9 @@ import subprocess
 import sys
 import shutil
 import os
+from typing import Optional, List
 
-def ensure_programs_in_path():
+def ensure_programs_in_path() -> None:
     """Aggiunge Tesseract e Ghostscript al PATH se necessario"""
     # Tesseract
     tesseract_paths = [
@@ -29,21 +30,24 @@ def ensure_programs_in_path():
                 os.environ["TESSDATA_PREFIX"] = str(Path(tess_path) / "tessdata")
             break
     
-    # Ghostscript
-    gs_paths = [
-        r"C:\Program Files\gs\gs10.03.1\bin",
-        r"C:\Program Files\gs\gs10.04.0\bin",
-        r"C:\Program Files (x86)\gs\gs10.03.1\bin"
+    # Ghostscript - Search all versions dynamically
+    gs_base_paths = [
+        r"C:\Program Files\gs",
+        r"C:\Program Files (x86)\gs"
     ]
     
-    for gs_path in gs_paths:
-        if Path(gs_path).exists():
-            current_path = os.environ.get("PATH", "")
-            if gs_path not in current_path:
-                os.environ["PATH"] = gs_path + os.pathsep + current_path
-            break
+    for gs_base in gs_base_paths:
+        if Path(gs_base).exists():
+            # Find all gs* subdirectories (gs10.03.1, gs10.04.0, etc.)
+            gs_versions = sorted(Path(gs_base).glob("gs*/bin"), reverse=True)
+            if gs_versions:
+                gs_path = str(gs_versions[0])  # Use latest version
+                current_path = os.environ.get("PATH", "")
+                if gs_path not in current_path:
+                    os.environ["PATH"] = gs_path + os.pathsep + current_path
+                break
 
-def check_tesseract():
+def check_tesseract() -> Optional[str]:
     """Verifica se Tesseract è installato"""
     return shutil.which("tesseract")
 
@@ -66,7 +70,7 @@ def auto_crop_image(image, threshold=250, margin=10):
     cropped = image.crop((left, top, right, bottom))
     return cropped
 
-def images_to_pdf(image_files, output_pdf_path):
+def images_to_pdf(image_files: List[Path], output_pdf_path: Path) -> bool:
     """Converte immagini in PDF (lossless)"""
     if not image_files:
         print("❌ Nessuna immagine da convertire")
@@ -80,7 +84,7 @@ def images_to_pdf(image_files, output_pdf_path):
         print(f"❌ Errore conversione PDF: {e}")
         return False
 
-def add_ocr_to_pdf(input_pdf, output_pdf, tesseract_path=None, language='ita'):
+def add_ocr_to_pdf(input_pdf: Path, output_pdf: Path, tesseract_path: Optional[str] = None, language: str = 'ita') -> bool:
     """Aggiunge layer OCR al PDF"""
     try:
         import ocrmypdf

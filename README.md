@@ -3,373 +3,109 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 
-Automate screenshot capture from Kindle for PC and convert to searchable PDF with OCR. Creates AI-ready PDFs with invisible text layer for ChatGPT, Claude, and other AI assistants.
+Cattura in automatico le pagine di **Kindle per PC** e le trasforma in un **PDF con testo ricercabile** (OCR). Ideale per creare copie digitali leggibili da ChatGPT, Claude e altri strumenti AI.
 
-> 📖 **New user?** See [QUICK_START.md](QUICK_START.md) for beginner-friendly guide.
-
----
-
-> 💡 **Works with more than just Kindle!**
-> 
-> This tool captures **any fullscreen application** that navigates with arrow keys:
-> - 📱 Kindle for PC, Calibre, other ebook readers
-> - 📄 PDF viewers (Adobe, Foxit, browser PDF view)
-> - 📊 PowerPoint presentations
-> - 🌐 Online book readers, flipbooks, web documents
-> 
-> **Requirements:** Fullscreen mode (F11) + Right arrow (→) to turn pages
+> 💡 **Funziona anche con altre app a schermo intero** che si sfogliano con la freccia destra (→): lettori PDF, Calibre, presentazioni PowerPoint, flipbook online.
 
 ---
 
-## 👀 Preview
+## ✨ Cosa fa
 
-### Web Interface
-
-Clean, modern UI with simple controls:
-
-```
-┌─────────────────────────────────────────────────────────┐
-│ 📚 Kindle to Searchable PDF                            │
-├─────────────────────────────────────────────────────────┤
-│ System Status                                           │
-│ ✅ OCR Ready: Tesseract and Ghostscript found!         │
-├─────────────────────────────────────────────────────────┤
-│ ⚙️ Capture Settings                                    │
-│                                                         │
-│ 📖 Number of Pages (max): [━━━━━━●] 1000             │
-│ ⏱️ Delay Between Pages: [━━●━━] 2.0s                  │
-│ 🏁 Auto-stop at end of book: ☑️                       │
-│                                                         │
-│ 🔍 OCR Settings                                        │
-│ ☑️ Enable OCR (Searchable PDF)                        │
-│ Language: [Italian ▼]                                  │
-│                                                         │
-│         [ 🚀 Start Capture ]                           │
-│                                                         │
-├─────────────────────────────────────────────────────────┤
-│ 📊 Status & Results                                    │
-│                                                         │
-│ Click 'Start Capture' to begin...                      │
-│                                                         │
-│         [ 📄 Download PDF ]                            │
-└─────────────────────────────────────────────────────────┘
-```
-
-### Terminal Output Example
-
-```bash
-$ .\.venv\Scripts\activate
-$ python app.py
-
-============================================================
-  📚 KINDLE TO PDF OCR - WEB INTERFACE
-============================================================
-
-🚀 Starting server on port 7861...
-
-⚠️  If browser doesn't open automatically:
-   👉 CLICK THIS LINK: http://127.0.0.1:7861
-
-💡 Keep this window open while using the app!
-============================================================
-
-* Running on local URL:  http://127.0.0.1:7861
-
-📸 Pagina 1 catturata
-📸 Pagina 2 catturata
-📸 Pagina 3 catturata
-   ... (keeps going until the book ends) ...
-📸 Pagina 186 catturata
-📸 Pagina 187 catturata
-⏸️  Pagina invariata (1/3) — probabile fine libro
-⏸️  Pagina invariata (2/3) — probabile fine libro
-⏸️  Pagina invariata (3/3) — probabile fine libro
-
-🏁 Fine libro rilevata: la pagina non cambia più → STOP automatico.
-
-✅ CATTURA COMPLETATA - 187 pagine
-
-📄 Creazione PDF base...
-✅ PDF base creato: ebook_20260101_124609_base.pdf (0.94 MB)
-
-🔍 Aggiunta layer OCR al PDF...
-🔍 Esecuzione OCR (lingua: ita)...
-
-Scanning contents     ████████████████████ 100% 5/5
-OCR                   ████████████████████ 100% 5/5
-PDF/A conversion      ████████████████████ 100% 5/5
-Linearizing           ████████████████████ 100% 100/100
-
-✅ PDF SEARCHABLE CREATO!
-📄 File: ebook_20260101_124609_searchable.pdf
-📦 Dimensione: 0.95 MB
-
-💡 Ora gli AI agent possono leggere il testo del libro!
-```
+- 📸 **Cattura automatica** delle pagine (screenshot uno dopo l'altro)
+- 🏁 **Si ferma da sola a fine libro** — non devi sapere quante pagine ha il libro
+- 🔍 **Testo OCR invisibile** → il PDF diventa ricercabile e leggibile dall'AI
+- 🌍 **Multilingua**: italiano, inglese, francese, tedesco, spagnolo, portoghese
 
 ---
 
-## 🎯 Features
+## 📋 Cosa ti serve
 
-- **Automated Capture** - PyAutoGUI screenshots Kindle pages
-- **🏁 Auto-Stop at End of Book** - Detects when pages stop changing and stops on its own — no need to count the book's pages
-- **OCR Text Layer** - Invisible searchable text via Tesseract
-- **Dual Interface** - Web UI (Gradio) or CLI
-- **Multi-language** - Italian, English, French, German, Spanish, Portuguese
-- **AI-Ready** - Perfect for ChatGPT, Claude analysis
+| | Dove prenderlo |
+|---|---|
+| **Windows + Kindle per PC** | già installato |
+| **Python 3.10+** | [python.org](https://www.python.org/downloads/) — spunta **"Add Python to PATH"** durante l'installazione |
+| **Tesseract OCR** | [download](https://github.com/UB-Mannheim/tesseract/wiki) — spunta la **lingua italiana** |
+| **Ghostscript** | [download](https://ghostscript.com/releases/gsdnld.html) |
 
 ---
 
-## 🚀 Installation
+## ⚙️ Installazione (una volta sola)
 
-### Prerequisites
+Apri **PowerShell** nella cartella del progetto e lancia questi due comandi:
 
-- Python 3.10+
-- Kindle for PC
-- [Tesseract OCR](https://github.com/UB-Mannheim/tesseract/wiki) (with language packs)
-- [Ghostscript](https://ghostscript.com/releases/gsdnld.html)
-
-### One-Time Setup
-
-```bash
-# 1. Clone
-git clone https://github.com/josscit/kindle-pdf-ocr.git
-cd kindle-pdf-ocr
-
-# 2. Create virtual environment
+```powershell
+# 1. crea l'ambiente isolato
 python -m venv .venv
 
-# 3. Activate
-.venv\Scripts\activate     # Windows
-source .venv/bin/activate  # Linux/Mac
-
-# 4. Install dependencies
-pip install -r requirements.txt
-
-# 5. Install Tesseract + Ghostscript manually (see links above)
+# 2. installa le librerie (usando il Python del .venv)
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
+Poi installa **Tesseract** e **Ghostscript** dai link qui sopra. Fine.
+
 ---
 
-## 💻 Usage
+## ▶️ Come si usa
 
-### Every Time
+**1. Avvia l'app** (sempre con il Python del `.venv`):
 
-```bash
-# Activate environment
-.venv\Scripts\activate
-
-# Run Web UI
-python app.py
+```powershell
+.\.venv\Scripts\python.exe app.py
 ```
 
-Browser opens automatically at `http://127.0.0.1:7861`
+Si apre il browser su `http://127.0.0.1:7861`.
 
-> 💡 **Note:** If port 7861 is busy, the app automatically tries port 7862. If browser doesn't open, click the link shown in terminal or manually navigate to the displayed URL.
+**2. Imposta le opzioni:**
+- Scegli la **lingua OCR**
+- Lascia **"Number of Pages"** alto e l'**Auto-stop** attivo → si ferma da solo a fine libro
 
-**Or run CLI:**
-```bash
-python kindle_auto_pdf_ocr.py
-```
+**3. Clicca "🚀 Start Capture".** Hai **10 secondi** per:
+- aprire Kindle a **schermo intero (F11)** sulla **prima pagina** da catturare
+- minimizzare il browser e **cliccare sulla finestra di Kindle**
 
----
+**4.** Le pagine si sfogliano da sole e il programma **si ferma quando il libro finisce**.
 
-## 🎨 Web UI Workflow
-
-1. **Configure:** Leave **Number of Pages** high (it's just a safety cap) and keep **Auto-stop** enabled, then pick delay and OCR language
-2. **Click "Start Capture"**
-3. **10-second countdown:**
-   - Open Kindle in fullscreen (F11)
-   - Go to first page
-   - Minimize browser
-   - Click Kindle window
-4. **Auto-capture** runs
-5. **Download PDF**
+**5.** Scarica il PDF. 🎉
 
 ---
 
-## 📖 Kindle Settings for Best OCR
+## 📖 Impostazioni Kindle per un OCR migliore
 
-OCR accuracy depends on how the page looks on screen. Open Kindle's **Aa** menu and set:
+Nel menu **"Aa"** di Kindle imposta:
 
-| Setting | Recommended | Why |
-|---------|-------------|-----|
-| **Color mode** | **White** (black text on white) | Tesseract is trained on dark text / light background. Dark and sepia modes lower accuracy. |
-| **Font size** | **Larger** | Bigger characters = more pixels per letter = more accurate OCR. With auto-stop the extra screenshots are no problem. |
-| **Page width** | **Narrower** | Cleaner layout, less text crammed per screen. |
+- **Modalità colore → Bianco** (testo nero su sfondo bianco). L'OCR è tarato così: il tema scuro o seppia peggiora il riconoscimento.
+- **Carattere → più grande**. Lettere più grandi = più dettaglio = OCR più preciso. Con l'auto-stop gli screenshot in più non sono un problema.
+- **Larghezza pagina → più stretta** per un'impaginazione più pulita.
 
-> 💡 **Why the page counter jumps by 2 or 3:** with a small font + wide page, one screen shows the text of 2–3 print pages at once, so Kindle's "Page X of Y" counter advances by more than 1 per turn. This is exactly why matching the page count never worked reliably — and why **auto-stop** (which just detects the end of the book) is the robust solution.
+> 💡 Con un **font piccolo + pagina larga**, una schermata contiene il testo di 2-3 pagine cartacee (il contatore "Pagina X di Y" scatta di 2 o 3 alla volta). È per questo che far coincidere il numero di pagine non funzionava mai: l'**auto-stop**, che rileva semplicemente la fine del libro, è la soluzione affidabile.
 
 ---
 
-## 🔧 Architecture
+## 🆘 Problemi comuni
 
-```
-Kindle (F11) → PyAutoGUI → Screenshots → img2pdf → Base PDF
-                                              ↓
-                                          OCRmyPDF + Tesseract
-                                              ↓
-                                      Searchable PDF
-```
-
-**PDF Contains:**
-- Visual layer: Original screenshots
-- Text layer: Invisible OCR text (for AI/search)
+| Problema | Soluzione |
+|---|---|
+| `No module named 'gradio'` / `'pyautogui'` | Stai usando il Python sbagliato. Usa **sempre** `.\.venv\Scripts\python.exe ...` |
+| `Tesseract not found` | Installa Tesseract con il pacchetto della lingua |
+| `Ghostscript not found` | Installa Ghostscript |
+| Porta `7861` occupata | L'app prova da sola la `7862`: usa il link mostrato nel terminale |
+| Testo un po' sfocato nel PDF | Normale (dipende dalla risoluzione dello schermo): resta leggibile e perfetto per l'AI |
+| Screenshot **neri** | La nuova app Kindle dal Microsoft Store (la vecchia "Kindle per PC" chiude il **30/06/2026**) ha un DRM più restrittivo che può bloccare la cattura schermo. Prova prima su poche pagine. |
 
 ---
 
-## 📁 Output
+## ⚖️ Note legali
 
-```
-screenshots/
-└── YYYYMMDD_HHMMSS/
-    ├── raw/
-    │   └── page_0001.png, page_0002.png, ...
-    └── ebook_YYYYMMDD_HHMMSS_searchable.pdf
-```
+**Usa solo per:** backup personali di ebook **che hai acquistato**, contenuti di pubblico dominio, materiale tuo.
+
+Lo strumento fa **screenshot** — non rimuove e non aggira il DRM. Sei responsabile del rispetto del copyright.
 
 ---
 
-## ⚙️ Configuration
+## 📝 Licenza
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| Pages (max) | 1000 | Upper limit — with auto-stop, capture ends earlier at the end of the book |
-| Auto-stop | Enabled | Stops automatically when the page stops changing (end of book) |
-| Delay | 2.0s | Wait between pages |
-| OCR | Enabled | Searchable text |
-| Language | ita | OCR language |
-
-**Supported languages:** ita, eng, fra, deu, spa, por
+MIT — vedi [LICENSE](LICENSE)
 
 ---
 
-## 🐛 Troubleshooting
-
-### "ModuleNotFoundError: No module named 'gradio'"
-
-Virtual environment not activated or dependencies not installed.
-
-**Fix:**
-```bash
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### "Tesseract not found"
-
-Tesseract not installed or language pack missing.
-
-**Fix:** Install Tesseract with your language pack. Script auto-detects common paths.
-
-### "Ghostscript not found"
-
-**Fix:** Install Ghostscript. Script finds all versions automatically.
-
-### "Cannot find empty port: 7861-7861"
-
-Previous instance still running.
-
-**Fix:** Close browser and PowerShell, wait 10 seconds, restart.
-
-### Poor text quality
-
-**Normal behavior.** Screenshot quality limited by screen resolution (~160 DPI). Readable but not print-quality.
-
-> 💡 For noticeably better OCR, set Kindle's **Color mode → White** and a **larger font** (see *Kindle Settings for Best OCR* above).
-
-### Capture stops too early / too late
-
-Auto-stop ends capture when **3 consecutive screens are identical**. If pages load slowly, raise the **Delay** so each page finishes rendering before the next screenshot. To disable end-of-book detection entirely, uncheck **Auto-stop** and set the exact page count.
-
-### Black screenshots / new Kindle app
-
-Amazon is retiring the **legacy "Kindle for PC"** on **June 30, 2026** in favor of a new Microsoft Store app with stricter DRM that **may block screen capture** (screenshots come out black). If your captures turn black after switching apps, that's why — test a few pages first.
-
----
-
-## 🔐 Legal
-
-**Permitted:**
-✅ Personal backups of purchased ebooks  
-✅ Public domain content  
-✅ Your own content  
-
-**Not permitted:**
-❌ DRM circumvention  
-❌ Sharing copyrighted material  
-❌ Commercial use without rights  
-
-**This tool screenshots - doesn't decrypt or remove DRM. Users responsible for copyright compliance.**
-
----
-
-## 📘 Technical Notes
-
-<details>
-<summary><b>How Dependency Detection Works</b></summary>
-
-### Auto-Finding Tesseract & Ghostscript
-
-Even if not in system PATH, script searches common install locations:
-
-```python
-def ensure_programs_in_path() -> None:
-    # Tesseract
-    tesseract_paths = [
-        r"C:\Program Files\Tesseract-OCR",
-        r"C:\Program Files (x86)\Tesseract-OCR"
-    ]
-    
-    # Ghostscript (all versions)
-    gs_base = r"C:\Program Files\gs"
-    gs_versions = sorted(Path(gs_base).glob("gs*/bin"), reverse=True)
-    
-    # Adds to os.environ["PATH"] at runtime
-```
-
-**Key:** Modifies PATH only for this process, not system-wide.
-
-</details>
-
-<details>
-<summary><b>Virtual Environment Explained</b></summary>
-
-### What is `.venv`?
-
-Isolated Python installation with its own packages.
-
-**Why?**
-- Avoids conflicts with system Python
-- Each project has its own dependencies
-- Can delete/recreate without breaking other projects
-
-**Structure:**
-```
-.venv/
-├── Scripts/
-│   ├── python.exe   # Isolated Python
-│   ├── activate     # Activation script
-└── Lib/
-    └── site-packages/  # Packages (gradio, etc.)
-```
-
-**Activation** temporarily modifies PATH to use `.venv/Scripts/python.exe`
-
-</details>
-
----
-
-## 🤝 Contributing
-
-Pull requests welcome!
-
----
-
-## 📝 License
-
-MIT - See [LICENSE](LICENSE)
-
----
-
-**Made with ❤️ by Jos from [IeXa Academy](https://www.iexa.it)**
+**Fatto con ❤️ da Jos di [IeXa Academy](https://www.iexa.it)**

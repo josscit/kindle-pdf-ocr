@@ -65,13 +65,13 @@ When you run the program, you'll see a clean interface like this:
 
 * Running on local URL:  http://127.0.0.1:7861
 
-📸 Pagina 1/5 catturata
-📸 Pagina 2/5 catturata
-📸 Pagina 3/5 catturata
-📸 Pagina 4/5 catturata
-📸 Pagina 5/5 catturata
+📸 Pagina 1 catturata
+📸 Pagina 2 catturata
+   ... (keeps going until the book ends) ...
+📸 Pagina 187 catturata
+🏁 Fine libro rilevata: la pagina non cambia più → STOP automatico.
 
-✅ CATTURA COMPLETATA - 5 pagine
+✅ CATTURA COMPLETATA - 187 pagine
 
 📄 Creazione PDF base...
 ✅ PDF base creato: ebook_20260101_124609_base.pdf
@@ -236,7 +236,8 @@ python app.py
 **Step 2: Configure**
 
 In the web page:
-- **Number of Pages:** Slide to your number (e.g., 10)
+- **Number of Pages (max):** Just leave it high — with **Auto-stop** on, the program stops by itself at the end of the book. (Lower it only if you want just a few pages.)
+- **🏁 Auto-stop at end of book:** Keep checked ✅ — no need to count pages anymore!
 - **Delay:** Leave at 2.0
 - **Enable OCR:** Keep checked ✅
 - **Language:** Select your book's language
@@ -250,6 +251,8 @@ Before clicking "Start Capture":
 - Open your book
 - Press **F11** (fullscreen)
 - Go to **first page**
+
+> 💡 **For best OCR quality:** in Kindle's **Aa** menu set **Color mode → White** (not dark/sepia) and a **larger font**. White background + big text = much cleaner text recognition.
 
 ---
 
@@ -353,11 +356,13 @@ Previous program still running.
 
 ## 💡 Tips
 
-1. ✅ **Test first** - Try 3 pages before full book
-2. ✅ **Fullscreen always** - Press F11 on Kindle
-3. ✅ **No distractions** - Close popups/notifications
-4. ✅ **Right language** - Match OCR to book language
-5. ✅ **Keep PowerShell open** - Don't close while program runs
+1. ✅ **Auto-stop does the counting** - Leave "Number of Pages" high; it stops by itself at the end of the book
+2. ✅ **White mode + big font** - In Kindle's "Aa" menu use White color mode and a larger font for the best OCR
+3. ✅ **Test first** - Try 3 pages before full book
+4. ✅ **Fullscreen always** - Press F11 on Kindle
+5. ✅ **No distractions** - Close popups/notifications
+6. ✅ **Right language** - Match OCR to book language
+7. ✅ **Keep PowerShell open** - Don't close while program runs
 
 ---
 

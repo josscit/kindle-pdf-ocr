@@ -36,8 +36,9 @@ Clean, modern UI with simple controls:
 ├─────────────────────────────────────────────────────────┤
 │ ⚙️ Capture Settings                                    │
 │                                                         │
-│ 📖 Number of Pages: [━━━━●━━] 5                       │
+│ 📖 Number of Pages (max): [━━━━━━●] 1000             │
 │ ⏱️ Delay Between Pages: [━━●━━] 2.0s                  │
+│ 🏁 Auto-stop at end of book: ☑️                       │
 │                                                         │
 │ 🔍 OCR Settings                                        │
 │ ☑️ Enable OCR (Searchable PDF)                        │
@@ -74,13 +75,19 @@ $ python app.py
 
 * Running on local URL:  http://127.0.0.1:7861
 
-📸 Pagina 1/5 catturata
-📸 Pagina 2/5 catturata
-📸 Pagina 3/5 catturata
-📸 Pagina 4/5 catturata
-📸 Pagina 5/5 catturata
+📸 Pagina 1 catturata
+📸 Pagina 2 catturata
+📸 Pagina 3 catturata
+   ... (keeps going until the book ends) ...
+📸 Pagina 186 catturata
+📸 Pagina 187 catturata
+⏸️  Pagina invariata (1/3) — probabile fine libro
+⏸️  Pagina invariata (2/3) — probabile fine libro
+⏸️  Pagina invariata (3/3) — probabile fine libro
 
-✅ CATTURA COMPLETATA - 5 pagine
+🏁 Fine libro rilevata: la pagina non cambia più → STOP automatico.
+
+✅ CATTURA COMPLETATA - 187 pagine
 
 📄 Creazione PDF base...
 ✅ PDF base creato: ebook_20260101_124609_base.pdf (0.94 MB)
@@ -105,6 +112,7 @@ Linearizing           ███████████████████�
 ## 🎯 Features
 
 - **Automated Capture** - PyAutoGUI screenshots Kindle pages
+- **🏁 Auto-Stop at End of Book** - Detects when pages stop changing and stops on its own — no need to count the book's pages
 - **OCR Text Layer** - Invisible searchable text via Tesseract
 - **Dual Interface** - Web UI (Gradio) or CLI
 - **Multi-language** - Italian, English, French, German, Spanish, Portuguese
@@ -168,7 +176,7 @@ python kindle_auto_pdf_ocr.py
 
 ## 🎨 Web UI Workflow
 
-1. **Configure:** Pages, delay, OCR language
+1. **Configure:** Leave **Number of Pages** high (it's just a safety cap) and keep **Auto-stop** enabled, then pick delay and OCR language
 2. **Click "Start Capture"**
 3. **10-second countdown:**
    - Open Kindle in fullscreen (F11)
@@ -177,6 +185,20 @@ python kindle_auto_pdf_ocr.py
    - Click Kindle window
 4. **Auto-capture** runs
 5. **Download PDF**
+
+---
+
+## 📖 Kindle Settings for Best OCR
+
+OCR accuracy depends on how the page looks on screen. Open Kindle's **Aa** menu and set:
+
+| Setting | Recommended | Why |
+|---------|-------------|-----|
+| **Color mode** | **White** (black text on white) | Tesseract is trained on dark text / light background. Dark and sepia modes lower accuracy. |
+| **Font size** | **Larger** | Bigger characters = more pixels per letter = more accurate OCR. With auto-stop the extra screenshots are no problem. |
+| **Page width** | **Narrower** | Cleaner layout, less text crammed per screen. |
+
+> 💡 **Why the page counter jumps by 2 or 3:** with a small font + wide page, one screen shows the text of 2–3 print pages at once, so Kindle's "Page X of Y" counter advances by more than 1 per turn. This is exactly why matching the page count never worked reliably — and why **auto-stop** (which just detects the end of the book) is the robust solution.
 
 ---
 
@@ -212,7 +234,8 @@ screenshots/
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| Pages | 5 | Number to capture |
+| Pages (max) | 1000 | Upper limit — with auto-stop, capture ends earlier at the end of the book |
+| Auto-stop | Enabled | Stops automatically when the page stops changing (end of book) |
 | Delay | 2.0s | Wait between pages |
 | OCR | Enabled | Searchable text |
 | Language | ita | OCR language |
@@ -252,6 +275,16 @@ Previous instance still running.
 ### Poor text quality
 
 **Normal behavior.** Screenshot quality limited by screen resolution (~160 DPI). Readable but not print-quality.
+
+> 💡 For noticeably better OCR, set Kindle's **Color mode → White** and a **larger font** (see *Kindle Settings for Best OCR* above).
+
+### Capture stops too early / too late
+
+Auto-stop ends capture when **3 consecutive screens are identical**. If pages load slowly, raise the **Delay** so each page finishes rendering before the next screenshot. To disable end-of-book detection entirely, uncheck **Auto-stop** and set the exact page count.
+
+### Black screenshots / new Kindle app
+
+Amazon is retiring the **legacy "Kindle for PC"** on **June 30, 2026** in favor of a new Microsoft Store app with stricter DRM that **may block screen capture** (screenshots come out black). If your captures turn black after switching apps, that's why — test a few pages first.
 
 ---
 

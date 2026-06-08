@@ -5,7 +5,7 @@
 
 Cattura in automatico le pagine di **Kindle per PC** e le trasforma in un **PDF con testo ricercabile** (OCR). Ideale per creare copie digitali leggibili da ChatGPT, Claude e altri strumenti AI.
 
-> 💡 **Funziona anche con altre app a schermo intero** che si sfogliano con la freccia destra (→): lettori PDF, Calibre, presentazioni PowerPoint, flipbook online.
+> 💡 Non è solo per Kindle: funziona con **molti altri lettori di ebook e PDF** (vedi sotto).
 
 ---
 
@@ -15,6 +15,25 @@ Cattura in automatico le pagine di **Kindle per PC** e le trasforma in un **PDF 
 - 🏁 **Si ferma da sola a fine libro** — non devi sapere quante pagine ha il libro
 - 🔍 **Testo OCR invisibile** → il PDF diventa ricercabile e leggibile dall'AI
 - 🌍 **Multilingua**: italiano, inglese, francese, tedesco, spagnolo, portoghese
+
+---
+
+## 📚 Funziona anche con altri lettori
+
+Il programma non "conosce" Kindle: fa **screenshot dello schermo** e preme la **freccia destra (→)** per girare pagina. Quindi va con **qualsiasi app su Windows** che:
+
+1. si mette a **schermo intero** (così cattura solo la pagina, senza barre)
+2. gira pagina con la **freccia destra →**
+
+Esempi compatibili:
+- 📖 **Kindle per PC**
+- 📚 Lettori ebook: **Calibre**, **Adobe Digital Editions**, **Thorium**
+- 📄 Lettori PDF: **Adobe Acrobat**, **Foxit**, **SumatraPDF**, PDF aperto nel **browser**
+- 📊 Presentazioni **PowerPoint/PDF**, **fumetti**, **flipbook** e lettori web
+
+L'OCR lavora sugli screenshot, quindi è **indipendente dal lettore**.
+
+> ⚠️ Eccezione: app con **DRM forte** (o la nuova app Kindle dal Microsoft Store) possono bloccare la cattura schermo → pagine nere.
 
 ---
 
@@ -91,6 +110,78 @@ Nel menu **"Aa"** di Kindle imposta:
 | Porta `7861` occupata | L'app prova da sola la `7862`: usa il link mostrato nel terminale |
 | Testo un po' sfocato nel PDF | Normale (dipende dalla risoluzione dello schermo): resta leggibile e perfetto per l'AI |
 | Screenshot **neri** | La nuova app Kindle dal Microsoft Store (la vecchia "Kindle per PC" chiude il **30/06/2026**) ha un DRM più restrittivo che può bloccare la cattura schermo. Prova prima su poche pagine. |
+
+---
+
+## 📂 Approfondimenti (facoltativi)
+
+<details>
+<summary><b>📘 Guida passo-passo per chi parte da zero</b></summary>
+
+<br>
+
+**1. Installa Python**
+- Vai su [python.org/downloads](https://www.python.org/downloads/) e scarica Python 3.12
+- ⚠️ Durante l'installazione **spunta "Add Python to PATH"**
+- Verifica: apri il Prompt dei comandi e scrivi `python --version`
+
+**2. Scarica il programma**
+- Su [github.com/josscit/kindle-pdf-ocr](https://github.com/josscit/kindle-pdf-ocr): pulsante verde **"Code" → "Download ZIP"**
+- Estrai la cartella (es. sul Desktop)
+
+**3. Apri PowerShell nella cartella**
+- Entra nella cartella, clicca sulla **barra dell'indirizzo** in alto, scrivi **powershell** e premi Invio
+
+**4. Installa (una volta sola)**
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+Poi installa Tesseract e Ghostscript (tendina qui sotto).
+
+**5. Avvia, ogni volta**
+```powershell
+.\.venv\Scripts\python.exe app.py
+```
+Si apre il browser: configura, clicca **Start Capture** e prepara Kindle in 10 secondi.
+
+</details>
+
+<details>
+<summary><b>🔤 Installare Tesseract e Ghostscript nel dettaglio</b></summary>
+
+<br>
+
+Servono due programmi: **Tesseract** (legge il testo) e **Ghostscript** (costruisce il PDF).
+
+**Tesseract OCR**
+- Installer: [release ufficiali](https://github.com/tesseract-ocr/tesseract/releases) — oppure [altre versioni](https://github.com/UB-Mannheim/tesseract/wiki)
+- ⚠️ Durante l'installazione seleziona **"Additional language data" → Italian (ita)**
+- Oppure con winget: `winget install UB-Mannheim.TesseractOCR`
+
+**Ghostscript**
+- Installer: [ghostscript.com/releases](https://ghostscript.com/releases/gsdnld.html)
+- Oppure con winget: `winget install Ghostscript.Ghostscript`
+
+**Verifica** (in un nuovo PowerShell):
+```powershell
+tesseract --version
+gswin64c --version
+```
+Se compaiono le versioni è tutto a posto. Anche se danno "comando non trovato", **lo script li trova comunque da solo** nei percorsi standard.
+
+</details>
+
+<details>
+<summary><b>❓ Cos'è il <code>.venv</code> e perché serve</b></summary>
+
+<br>
+
+Il `.venv` è un **ambiente isolato**: una copia di Python con le librerie di *questo* programma, separata dal Python di sistema, così non crea conflitti con altri progetti.
+
+Per questo i comandi usano `.\.venv\Scripts\python.exe`: è il Python "giusto", quello che ha le librerie installate. Se usi il `python` di sistema ottieni l'errore `No module named ...`.
+
+</details>
 
 ---
 

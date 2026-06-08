@@ -144,7 +144,7 @@ def capture_kindle_to_searchable_pdf(num_pages, output_folder="screenshots", del
         if not tesseract_path:
             print("\n⚠️  ATTENZIONE: Tesseract OCR non trovato!")
             print("   Il PDF sarà creato SENZA testo ricercabile.")
-            print("   Per installare Tesseract, vedi: INSTALL_TESSERACT.md")
+            print("   Per installare Tesseract, vedi la sezione 'Installare Tesseract' nel README.md")
             response = input("\n   Continuo senza OCR? [S/n]: ").strip().lower()
             if response == 'n':
                 print("Operazione annullata.")
@@ -325,7 +325,7 @@ if __name__ == "__main__":
         print(f"\n✅ Tesseract OCR trovato: {tesseract_path}")
     else:
         print(f"\n⚠️  Tesseract OCR NON trovato")
-        print("   Per installarlo, segui le istruzioni in INSTALL_TESSERACT.md")
+        print("   Per installarlo, vedi la sezione 'Installare Tesseract' nel README.md")
         print("   Puoi comunque creare PDF senza OCR\n")
     
     try:

@@ -70,6 +70,21 @@ def auto_crop_image(image, threshold=250, margin=10):
     cropped = image.crop((left, top, right, bottom))
     return cropped
 
+def _page_change_fraction(img1, img2, pixel_delta: int = 12, size=(120, 120)) -> float:
+    """
+    Frazione di pixel che cambiano tra due schermate (0.0 = identiche, 1.0 = tutto diverso).
+
+    Serve per il rilevamento automatico della fine del libro: quando la freccia destra
+    non sposta più la pagina, due schermate consecutive diventano identiche e questa
+    frazione crolla verso 0. Le immagini vengono ridotte in scala di grigi (veloce) e
+    si contano solo i pixel che variano oltre `pixel_delta`, per ignorare il rumore di
+    rendering/anti-aliasing.
+    """
+    a = np.asarray(img1.convert('L').resize(size), dtype=np.int16)
+    b = np.asarray(img2.convert('L').resize(size), dtype=np.int16)
+    return float(np.mean(np.abs(a - b) > pixel_delta))
+
+
 def images_to_pdf(image_files: List[Path], output_pdf_path: Path) -> bool:
     """Converte immagini in PDF (lossless)"""
     if not image_files:
@@ -113,8 +128,9 @@ def add_ocr_to_pdf(input_pdf: Path, output_pdf: Path, tesseract_path: Optional[s
         print(f"❌ Errore OCR: {e}")
         return False
 
-def capture_kindle_to_searchable_pdf(num_pages, output_folder="screenshots", delay=1.5, 
-                                      auto_crop=False, use_ocr=True, ocr_language='ita'):
+def capture_kindle_to_searchable_pdf(num_pages, output_folder="screenshots", delay=1.5,
+                                      auto_crop=False, use_ocr=True, ocr_language='ita',
+                                      auto_stop=True, stop_after=3, change_threshold=0.003):
     """
     Cattura screenshot Kindle e crea PDF Searchable con OCR
     """
@@ -156,8 +172,9 @@ def capture_kindle_to_searchable_pdf(num_pages, output_folder="screenshots", del
     print("  📚 KINDLE TO SEARCHABLE PDF - AUTOMAZIONE COMPLETA")
     print("="*70)
     print(f"\n📊 Configurazione:")
-    print(f"   • Pagine da catturare: {num_pages}")
+    print(f"   • Pagine da catturare: {num_pages}" + (" (MAX — stop automatico a fine libro)" if auto_stop else ""))
     print(f"   • Delay tra pagine: {delay}s")
+    print(f"   • Auto-stop fine libro: " + (f"✅ Sì (dopo {stop_after} schermate identiche)" if auto_stop else "❌ No"))
     print(f"   • Auto-crop margini: {'✅ Sì' if auto_crop else '❌ No'}")
     print(f"   • OCR (testo searchable): {'✅ Sì (' + ocr_language + ')' if use_ocr else '❌ No'}")
     print(f"   • Cartella output: {session_folder}")
@@ -176,17 +193,53 @@ def capture_kindle_to_searchable_pdf(num_pages, output_folder="screenshots", del
     print("\n🚀 INIZIO CATTURA!\n")
     
     captured_pages = []
-    
-    # Cattura pagine
-    for page_num in range(1, num_pages + 1):
+    prev_img = None          # ultima pagina UNICA catturata (per il confronto)
+    consecutive_dup = 0      # schermate identiche di fila viste finora
+    page_num = 0             # pagine effettivamente salvate
+    stopped_at_end = False
+
+    # Cattura pagine — con rilevamento automatico della fine del libro.
+    # `num_pages` qui è il LIMITE MASSIMO: se auto_stop è attivo, ci si ferma prima,
+    # quando la freccia destra non cambia più la pagina (= fine libro).
+    while page_num < num_pages:
         try:
             screenshot = pyautogui.screenshot()
-            
+
+            # --- AUTO-STOP: la pagina non cambia più? ---
+            if auto_stop and prev_img is not None:
+                frac = _page_change_fraction(prev_img, screenshot)
+
+                if frac < change_threshold:
+                    # Sembra identica. Distinguo "fine libro" da "pagina ancora in
+                    # caricamento": aspetto ancora un po' e riscatto prima di decidere.
+                    time.sleep(delay)
+                    screenshot = pyautogui.screenshot()
+                    frac = _page_change_fraction(prev_img, screenshot)
+
+                if frac < change_threshold:
+                    consecutive_dup += 1
+                    print(f"⏸️  Pagina invariata ({consecutive_dup}/{stop_after}) — probabile fine libro")
+                    if consecutive_dup >= stop_after:
+                        print("\n🏁 Fine libro rilevata: la pagina non cambia più → STOP automatico.")
+                        stopped_at_end = True
+                        break
+                    # Non ancora certi: provo ad avanzare e ricontrollo al giro dopo.
+                    pyautogui.press('right')
+                    time.sleep(delay)
+                    continue
+
+                consecutive_dup = 0  # pagina diversa → ripartiamo da zero
+
+            # --- Pagina nuova: salvala ---
+            page_num += 1
             raw_filename = raw_folder / f"page_{page_num:04d}.png"
             screenshot.save(raw_filename, dpi=(300, 300))
-            
-            print(f"📸 Pagina {page_num}/{num_pages} catturata")
-            
+
+            cap_info = f"📸 Pagina {page_num} catturata"
+            if not auto_stop:
+                cap_info = f"📸 Pagina {page_num}/{num_pages} catturata"
+            print(cap_info)
+
             if auto_crop:
                 cropped = auto_crop_image(screenshot)
                 cropped_filename = cropped_folder / f"page_{page_num:04d}.png"
@@ -195,18 +248,25 @@ def capture_kindle_to_searchable_pdf(num_pages, output_folder="screenshots", del
                 captured_pages.append(cropped_filename)
             else:
                 captured_pages.append(raw_filename)
-            
+
+            prev_img = screenshot
+
+            # Avanza alla pagina successiva (salto solo dopo l'ultima consentita)
             if page_num < num_pages:
                 pyautogui.press('right')
                 time.sleep(delay)
                 print()
-        
+
         except KeyboardInterrupt:
             print(f"\n\n⚠️  Interrotto dall'utente alla pagina {page_num}")
             break
         except Exception as e:
             print(f"\n❌ Errore alla pagina {page_num}: {e}")
             break
+
+    if auto_stop and not stopped_at_end and page_num >= num_pages:
+        print(f"\n⚠️  Raggiunto il limite massimo di {num_pages} scatti senza rilevare la fine.")
+        print("    Se il libro è più lungo, rilancia con un limite più alto.")
     
     print("\n" + "="*70)
     print(f"✅ CATTURA COMPLETATA - {len(captured_pages)} pagine")

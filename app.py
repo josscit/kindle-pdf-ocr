@@ -29,7 +29,7 @@ Please install:
 
 See README.md for detailed instructions."""
 
-def capture_ebook(num_pages, delay, ocr_enabled, ocr_language):
+def capture_ebook(num_pages, delay, ocr_enabled, ocr_language, auto_stop):
     """Capture ebook and create PDF"""
     
     try:
@@ -53,7 +53,8 @@ def capture_ebook(num_pages, delay, ocr_enabled, ocr_language):
             delay=delay,
             auto_crop=False,
             use_ocr=ocr_enabled,
-            ocr_language=ocr_language
+            ocr_language=ocr_language,
+            auto_stop=auto_stop
         )
         
         if result_folder:
@@ -107,13 +108,13 @@ with gr.Blocks(title="Kindle to Searchable PDF") as demo:
             
             num_pages = gr.Slider(
                 minimum=1,
-                maximum=500,
-                value=5,
+                maximum=2000,
+                value=1000,
                 step=1,
-                label="📖 Number of Pages",
-                info="How many pages to capture"
+                label="📖 Number of Pages (limite massimo)",
+                info="Tetto massimo di scatti. Con l'auto-stop attivo, la cattura si ferma da sola a fine libro: lascialo alto."
             )
-            
+
             delay = gr.Slider(
                 minimum=1.0,
                 maximum=5.0,
@@ -122,7 +123,13 @@ with gr.Blocks(title="Kindle to Searchable PDF") as demo:
                 label="⏱️ Delay Between Pages (seconds)",
                 info="Wait time for page loading"
             )
-            
+
+            auto_stop = gr.Checkbox(
+                label="🏁 Auto-stop a fine libro",
+                value=True,
+                info="Si ferma da solo quando la pagina non cambia più (consigliato). Niente più conteggi: 'Number of Pages' diventa solo un limite di sicurezza."
+            )
+
             gr.Markdown("### 🔍 OCR Settings")
             
             ocr_enabled = gr.Checkbox(
@@ -170,8 +177,9 @@ with gr.Blocks(title="Kindle to Searchable PDF") as demo:
     5. **Download** your searchable PDF when complete!
     
     ### 💡 Tips:
+    - **Auto-stop attivo** → non serve sapere quante pagine ha il libro: lascia il limite alto e si ferma da solo a fine libro
     - Use **2.0s delay** for standard books
-    - Increase delay if pages load slowly
+    - Increase delay if pages load slowly (l'auto-stop è più affidabile con un delay adeguato)
     - Enable **OCR** for AI agent compatibility
     - **Italian (ita)** works best for Italian books
     
@@ -184,7 +192,7 @@ with gr.Blocks(title="Kindle to Searchable PDF") as demo:
     # Button action
     capture_btn.click(
         fn=capture_ebook,
-        inputs=[num_pages, delay, ocr_enabled, ocr_language],
+        inputs=[num_pages, delay, ocr_enabled, ocr_language, auto_stop],
         outputs=[pdf_output, status_text]
     )
 
